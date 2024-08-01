@@ -172,6 +172,18 @@ const escogerCursoPorArea = ()=>{
     }
 }
 
+//Manejo de DOM
+
+HTMLMain = document.getElementById("mainContent")
+
+const mostrarCursosEnPagina = ()=>{
+    TxtTodosLosCursos = ""
+    for (let obj of datosCursos){
+        TxtTodosLosCursos += obj.escritorDOM()
+    }
+    HTMLMain.innerHTML = TxtTodosLosCursos
+}
+
 const lógicaMenu = ()=>{
     let choice
     do {
@@ -196,7 +208,8 @@ const lógicaMenu = ()=>{
                 mostrarTodosLosCursos();
                 break;
             case "0":
-                alert("Gracias Por Usar Nuestro Software");
+                alert("Gracias Por Usar Nuestro Software CRUD");
+                mostrarCursosEnPagina()
                 break;
             default:
                 alert("Opción Invalida");
@@ -206,17 +219,3 @@ const lógicaMenu = ()=>{
 }
 
 lógicaMenu()
-
-//Manejo de DOM
-
-HTMLMain = document.getElementById("mainContent")
-
-const mostrarCursosEnPagina = ()=>{
-    TxtTodosLosCursos = ""
-    for (let obj of datosCursos){
-        TxtTodosLosCursos += obj.escritorDOM()
-    }
-    HTMLMain.innerHTML = TxtTodosLosCursos
-}
-
-mostrarCursosEnPagina()
