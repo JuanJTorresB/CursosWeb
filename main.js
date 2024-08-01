@@ -40,6 +40,15 @@ class cursos{
             console.error(error);
         };
     }
+    escritorDOM(){
+        let textHTML = `<div style="border: 2px solid black">
+        <h3 style="color: #156">Nombre Curso: </h3><b>${this.nombre}</b>
+        <h4 style="color: #156">Descripción Curso: </h4><b>${this.descripción}</b>
+        <h4 style="color: #156">Area Temática del Curso: </h4><b>${this.areaTemática}</b>
+        <h4 style="color: #156">Contenido Curso: </h4><b><br>${(this.contenido).join("<br>")}</b>
+        </div>`
+        return textHTML
+    }
 }
 
 //Código Quemado Para Hacer Pruebas
@@ -62,14 +71,15 @@ papiroflexia.modificadorContenido("Pasta")
 console.log(datosCursos);
 
 // Textos del Menu
-textoMenuPrincipal = `Bienvenido Usuario \n¿Que desea hacer el dia de hoy? \n1 Agregar Nuevo Curso\n2 Eliminar Curso \n3 Modificar Curso \n4 Buscar Curso por Area Temática \n5 Mostrar Todos los Cursos \n0 Salir`;
+textoMenuPrincipal = `Bienvenido Usuario \n¿Que desea hacer el dia de hoy? \n1 Agregar Nuevo Curso\n2 Eliminar Curso \n3 Modificar Curso \n4 Buscar Curso por Area Temática \n5 Mostrar Todos los Cursos \n0 Salir y Ver Cursos en La Pagina`;
 
 const agregarNuevoCurso = ()=>{
     cursoNombre = prompt("¿Cual es el nombre del Curso?")
     cursoDescripción = prompt("¿Descripción del Curso?")
+    cursoAreaTemática = prompt("Area Temática del Curso?")
     cursoContenidoBruto = prompt("Contenido del Curso en el formato \nNombreContenido1,NombreContenido2,NombreContenido3")
     cursoContenido = cursoContenidoBruto.split(",")
-    let nuevoCurso = new cursos(cursoNombre, cursoDescripción, cursoContenido)
+    let nuevoCurso = new cursos(cursoNombre, cursoDescripción, cursoContenido, cursoAreaTemática)
     datosCursos.push(nuevoCurso)
     alert("Curso Agregado Correctamente")
 }
@@ -196,3 +206,17 @@ const lógicaMenu = ()=>{
 }
 
 lógicaMenu()
+
+//Manejo de DOM
+
+HTMLMain = document.getElementById("mainContent")
+
+const mostrarCursosEnPagina = ()=>{
+    TxtTodosLosCursos = ""
+    for (let obj of datosCursos){
+        TxtTodosLosCursos += obj.escritorDOM()
+    }
+    HTMLMain.innerHTML = TxtTodosLosCursos
+}
+
+mostrarCursosEnPagina()
